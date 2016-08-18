@@ -10,7 +10,7 @@ class hr_contract(models.Model):
 	_name = 'hr.contract'
 	_inherit = 'hr.contract'
 	
-	# If autocompute = True, the contract will be used in compute_legal_leaves ...
+	# If autocompute = True, the contract will be used in compute_legal_leaves
 	autocompute = fields.Boolean(string="Cálculo Vacaciones", default=False)
 	
 	@api.model
