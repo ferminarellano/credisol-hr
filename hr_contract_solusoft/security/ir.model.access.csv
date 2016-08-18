@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_addons/hr_contract_solusoft/_addons/hr_contract_solusoft/,addons/hr_contract_solusoft/.addons/hr_contract_solusoft/,model_addons/hr_contract_solusoft/_addons/hr_contract_solusoft/,,1,0,0,0

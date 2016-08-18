@@ -1,0 +1,74 @@
+<openerp>
+	<data>
+		<record id="impuesto_vecinal_config_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Configuracion de Impuesto Vecinal</field>
+			<field name="model">impuesto.vecinal.config</field>
+			<field name="arch" type="xml">
+				<form string="Configuración de Impuesto Vecinal">
+					<sheet>
+						<group>
+							<field name="agencia" />
+							<field name="periodo" />
+							<field name="cuotas" />
+							<field name="fecha_inicio" />
+						</group>
+		
+						<group string="Información de Cuotas">
+							<field name="cuotas_ids" nolabel="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="impuesto_vecinal_config_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Configuracion de Impuesto Vecinal</field>
+			<field name="model">impuesto.vecinal.config</field>
+			<field name="arch" type="xml">
+				<tree string="Configuración de Impuesto Vecinal">
+					<field name="agencia" />
+					<field name="periodo" />
+					<field name="cuotas" />
+				</tree>
+			</field>
+		</record>
+
+
+
+		<record id="impuesto_vecinal_action" model="ir.actions.act_window">
+			<field name="name">Impuesto Vecinal</field>
+			<field name="res_model">impuesto.vecinal.config</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem name="Impuesto Vecinal" id="impuesto_vecinal_config_id" sequence="10" parent="hr_payroll.menu_hr_root_payroll" action="impuesto_vecinal_action"/>
+
+
+		<record id="impuesto_vecinal_cuota_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Cuotas de Impuesto Vecinal</field>
+			<field name="model">impuesto.vecinal.cuotas</field>
+			<field name="arch" type="xml">
+				<form string="">
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="fecha_pago"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="impuesto_vecinal_cuota_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Cuotas de Impuesto Vecinal</field>
+			<field name="model">impuesto.vecinal.cuotas</field>
+			<field name="arch" type="xml">
+				<tree string="Cuotas de Impuesto Vecinal">
+					<field name="name" />
+					<field name="fecha_pago" />
+				</tree>
+			</field>
+		</record>
+
+	</data>
+</openerp>

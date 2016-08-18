@@ -1,0 +1,242 @@
+﻿<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report
+			id="report_contrato_permanente"
+			string="Contrato Permanente"
+			model="hr.contract"
+			report_type="qweb-pdf"
+			name="hr_contract_solusoft.report_contrato_permanente_template"
+		/>
+		
+		<template id="report_contrato_permanente_template">
+		    <t t-foreach="docs" t-as="o">
+		        <div class="page">
+		          <!-- Report page content -->
+					<div>
+					
+					<p align="center">
+    <strong style="font-size: 18px;" >CONTRATO INDIVIDUAL DE TRABAJO POR TIEMPO INDEFINIDO</strong>
+</p>
+<br/>
+<p style="text-align: justify; text-justify: inter-word;">
+    Nosotros, <strong>Raúl Ernesto Alfaro Iglesias</strong>, <strong> </strong>mayor de<strong> </strong>de edad, casado, hondureño, y de este domicilio de la
+ciudad La Ceiba, Atlántida, actuando en su condición de Gerente General de    <strong>EL FONDO PARA EL DESARROLLO LOCAL DE HONDURAS, OPDF (CREDISOL, OPDF),</strong> constituido de conformidad con las leyes de la República de
+    Honduras, en adelante denominado EL PATRONO y<strong> </strong><strong><span style="text-transform:uppercase;" t-field="o.employee_id.name" /></strong>, <span t-esc="get_age(o.employee_id.birthday, o.date_start)" /> años de edad, <span t-esc="get_marital(''+o.employee_id.marital,''+o.employee_id.gender)" />, de nacionalidad
+    Hondureña, con número de identidad <span t-field="o.employee_id.identification_id" /> y con domicilio en <span t-field="o.employee_id.address_home_id.city" />, <span t-field="o.employee_id.address_home_id.state_id.name" />; quien comparece por sí mismo y en adelante se llamara EL
+    TRABAJADOR.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    Por el presente documento celebramos un contrato individual de trabajo por tiempo indefinido, que será regido bajo las siguientes
+</p>
+<p align="center">
+    <strong></strong>
+</p>
+<p align="center">
+    <strong>CLAUSULAS</strong>
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong></strong>
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>PRIMERA: <u>NATURALEZA DEL TRABAJO.</u></strong>
+    EL TRABAJADOR se obliga a prestar sus servicios personales bajo la dirección y subordinación de EL PATRONO, en forma exclusiva (salvo que éste por escrito
+    autorice lo contrario) con sentido de responsabilidad, honestidad y eficiencia en el puesto de <strong><span style="text-transform:uppercase;" t-field="o.employee_id.job_id.name" />;</strong> donde sus
+funciones se encuentran detalladas en el Manual de Puestos de la empresa; así como cuyas actividades entre otras consisten en    <u> cumplir con las obligaciones requeridas por la empresa ,</u> que se desempeñara con la mayor eficiencia, cuidado y esmero, en el tiempo, lugar y
+    condiciones convenidas; ya que el trabajo que realizara EL TRABAJADOR será el de administrar, dirigir, supervisar y controlar su área de trabajo, debido al
+    puesto que desempeñara se le denominara empleado de confianza, labor que la realizara con lealtad y fidelidad para con EL PATRONO.<strong></strong>
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong></strong>
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>SEGUNDA: <u>DURACION DEL CONTRATO</u>.</strong>
+Este contrato es por tiempo indefinido, iniciando la relación de trabajo el día <span t-field="o.date_start" t-field-options='{"format": "dd"}'/> de <span style="text-transform: capitalize;" t-field="o.date_start" t-field-options='{"format": "MMMM"}'/> del <span t-field="o.date_start" t-field-options='{"format": "y"}'/>, considerando los primeros sesenta días como    <strong>PERIODO DE PRUEBA</strong>, termino durante el cual cualquiera de las partes puede poner término al Contrato por su propia voluntad con justa causa
+    o sin ella sin incurrir en responsabilidad alguna.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>TERCERA: <u>LUGAR DE TRABAJO</u>.</strong>
+    EL TRABAJADOR prestará sus servicios en los locales u oficinas que EL PATRONO tenga en la actualidad o que establezca en el futuro, quedando convenido que
+    EL TRABAJADOR puede ser trasladado a otro local, sitio, departamento o división de la empresa, a requerimiento de EL PATRONO y con el consentimiento
+    expreso de EL TRABAJADOR.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong></strong>
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>CUARTA</strong>
+    : <strong><u>JORNADA DE TRABAJO</u>.</strong> La jornada de trabajo consistirá en el fijado por EL PATRONO para la labor respectiva, pudiendo EL PATRONO
+    fijar para cada actividad la hora entrada y salida de los trabajadores, el lugar y el momento en que deben comenzar y terminar las jornadas de trabajo, reservándose el derecho de cambiar la hora de entrada y salida en cada
+    jornada, lo cual notificara directamente al trabajador mediante avisos especiales fijados en lugares visibles y de acuerdo a las disposiciones legales
+    vigentes. Asimismo EL TRABAJADOR se obliga a laborar en las jornadas ordinarias, los días feriados de fecha nacional o local, siempre y cuando sea
+    legalmente requerido para ello por EL PATRONO, teniendo derecho en tales casos a las remuneraciones que fija la ley. En todo caso se sujetará al régimen de
+    jornada para los empleados de confianza según lo establecido el artículo 325 literal A del Código de Trabajo respecto a las jornadas de trabajo.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>QUINTA: <u>SALARIO</u>. </strong>
+    EL PATRONO se obliga a remunerar a EL TRABAJADOR LA CANTIDAD DE <span style="text-transform:uppercase;" t-esc="to_word(int(o.wage))"/> LEMPIRAS EXACTOS (LPS.<span t-esc="'{0:,.2f}'.format(int(o.wage))" />) a razón de cada mes; en el lugar que indique EL
+    PATRONO e inmediatamente después de cumplida la jornada de trabajo. El pago del salario se hará con la moneda legal en curso de Honduras; en periodos de
+    quincena los 15, 30 ó 31 de cada mes. Cuando la fecha coincida con un feriado o descanso, se pagara el día hábil anterior al mismo.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>SEXTA:</strong>
+    <strong><u>OBLIGACIONES DEL TRABAJADOR.</u></strong>
+    EL TRABAJADOR realizara personalmente su labor en los términos estipulados por el reglamento; así como las cuotas o metas de producción diarias
+    establecidas y exigidas por EL PATRONO. Acatará las órdenes e instrucciones por parte de EL PATRONO en todo momento. EL TRABAJADOR se desempeñara con los
+    índices de calidad y eficiencia, a observar y cumplir estrictamente los términos del presente Contrato, del Reglamento Interno de Trabajo, del Reglamento
+    de Higiene y Seguridad, Políticas Internas y demás leyes de trabajo y previsión social, en cuanto al modo tiempo o cantidad de trabajo; EL TRABAJADOR
+    también se obliga a reparar e indemnizar a EL PATRONO por los daños y perjuicios ocasionados a la maquinaría, equipo y a los materiales, herramientas y
+    útiles que se le proporcionen para la ejecución de su trabajo, cuando estos se deban a negligencia, irresponsabilidad, dolo, etc., de su parte de acuerdo a
+    lo dispuesto por la legislación. Las obligaciones de los trabajadores también se encuentran reguladas en el artículo 97 del Código del Trabajo; y
+    especialmente se obliga irrevocablemente, por la naturaleza del trabajo, a lo siguiente:
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    a) Autorizar expresamente a CREDISOL, OPDF en su condición de Patrono, para que pueda someterme a los test que considere necesarios, como ser:
+Toxicológicas, Antidoping, Pruebas de confianza, Pruebas Psicométricos e Investigaciones Socioeconómicas, ya sea previo a iniciar la relación de trabajo o en cualquier tiempo durante la misma, ya que declaro que acepto y entiendo que estos test
+    relacionados son una condición indispensable para acceder al puesto de trabajo o para que el mismo se mantenga, librando al Patrono de toda responsabilidad
+    legal por reclamos judiciales o extrajudiciales, presentes, pasados o futuros en relación con la presente autorización, que igualmente me obligo a
+    suscribir junto al presente contrato.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>SEPTIMA:</strong>
+    EL PATRONO podrá imponer sanciones, amonestación verbal, amonestación escrita, suspensión de labores hasta por ocho días sin goce de salario y en su caso
+    la terminación del Contrato, tomando en consideración para ello la gravedad de la falta cometida y la comprobación de la misma. El contrato podrá
+    rescindirse por el incumplimiento de los términos antes descritos, por las partes, u otras causas que se estime que va en contra de la misión, objetivos, y
+    metas de la institución por parte de EL TRABAJADOR. Además, lo no establecido en este contrato, se deberá regir por el código del trabajo, y demás leyes
+    del país, relacionadas a este respecto. Cualquiera de las partes puede dar por terminado el presente contrato, ya sea por mutuo consentimiento o de manera
+    unilateral; así mismo ambas partes se comprometen de manera voluntaria a otorgar el preaviso respectivo según el tiempo que haya en la relación laboral
+    caso contrario que una de las partes incumpla con el preaviso respectivo tendrá que pagar los daños y perjuicios que ocasione a la parte afectada. Así
+    mismo EL PATRONO se compromete que una vez de haber dado el preaviso correspondiente ya sea por su parte o por parte de EL TRABAJADOR pagara lo que le
+    corresponde según lo establecido en el Código de Trabajo Vigente de Honduras.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>OCTAVA:</strong>
+    Queda terminantemente prohibido para EL TRABAJADOR, cualquier tipo de relación extra trabajo, que puedan mantener con todos los clientes de la institución
+    y que las mismas puedan dar lugar a conductas anómalas que conlleven perjuicio a la institución.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>NOVENA:</strong>
+    <strong>PACTO DE CONFIDENCIALIDAD</strong>
+    : Atendida la naturaleza del servicio que prestara el TRABAJADOR, se obliga a guardar confidencialidad, a no compartir, ni a vender, ni utilizar para
+    beneficio propio información de la Empresa, ni a distribuir, reproducir o difundir secretos de su trabajo. Así mismo es de su conocimiento que al incumplir
+    esta clausula incurre en responsabilidad civil y penal para con EL PATRONO.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong></strong>
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong></strong>
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>DECIMA:</strong>
+    EL TRABAJADOR reconoce que la naturaleza de su trabajo es muy importante en vista de la información de la empresa a la que tiene acceso; es por eso que de
+    manera voluntaria y expresa manifiesta que al haber incumplimiento por una ó ambas de las partes en el presente contrato, dará al PATRONO un mes para que
+    pueda verificar a cabalidad el desempeño de las funciones asignadas que se le asigno en su área de trabajo; y que después de haber pasado ese mes de
+    verificación, El PATRONO deberá cancelar sus derechos labores que le correspondan.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong></strong>
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong></strong>
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>DECIMA PRIMERA: <u>DEPENDIENTES.</u></strong>
+    EL TRABAJADOR declara que las personas nominadas a continuación dependen económicamente de él y tienen los siguientes vínculos o parentescos:
+</p>
+
+
+<table width="100%">
+        <thead>
+            <tr>
+                <th style="padding:0 5px 0 5px;">NOMBRE COMPLETO</th>
+                <th></th>
+                <th style="padding:0 5px 0 5px;">EDAD</th>
+                <th></th>
+                <th style="padding:0 5px 0 5px;">PARENTESCO</th>
+                <th></th>
+                <th style="padding:0 5px 0 5px;">DOMICILIO</th>
+                <th></th>
+            </tr>
+        </thead>
+		
+        <tbody>
+            <tr>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+            </tr>
+			
+			<tr>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+            </tr>
+			
+			<tr>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+                <td style="border-bottom:1px solid black; height:20px;"></td>
+                <td></td>
+            </tr>
+
+        </tbody>
+    </table>
+<br/>
+<p style="text-align: justify; text-justify: inter-word;">
+    <strong>DECIMA SEGUNDA: </strong>
+    Ambas partes <strong><u>RATIFICAN</u></strong> de manera expresa y voluntaria el presente contrato individual de trabajo por tiempo indefinido.
+</p>
+<p style="text-align: justify; text-justify: inter-word;">
+    En fe de lo anterior, se suscribe el presente contrato en la ciudad de La Ceiba, departamento de Atlántida, Honduras, a los <span style="text-transform:lowercase;" t-esc="date_to_word(o)"/>. Firman los comparecientes y los dos testigos, quedando un ejemplar en poder de cada una de las partes contratantes.
+</p>
+
+<br/>
+<br/>
+
+<table style="text-align:center;width:100%;">
+  <tr>
+    <td style="padding:0 5px 0 5px;">_________________________</td>
+    <td style="padding:0 5px 0 5px;">_________________________</td>
+  </tr>
+  <tr>
+    <td style="padding:0 5px 0 5px;">EL PATRONO</td>
+    <td style="padding:0 5px 0 5px;">EL TRABAJADOR</td>
+  </tr>
+</table>
+
+<br />
+<br />
+<br />
+
+<table style="text-align:center; width:100%;">
+  <tr>
+    <td style="padding:0 5px 0 5px;">_________________________</td>
+    <td style="padding:0 5px 0 5px;">_________________________</td>
+  </tr>
+  <tr>
+    <td style="padding:0 5px 0 5px;">TESTIGO</td>
+    <td style="padding:0 5px 0 5px;">TESTIGO</td>
+  </tr>
+</table>		
+				
+					</div>
+		        </div>
+		      </t>
+		</template>
+	</data>
+</openerp>

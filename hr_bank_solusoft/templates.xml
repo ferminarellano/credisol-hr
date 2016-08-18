@@ -1,0 +1,173 @@
+<openerp>
+	<data>
+		 <record id="hr_agencia_form_view" model="ir.ui.view">
+                        <field name="name">Vista de Formulario de Agencias</field>
+                        <field name="model">hr.agencias</field>
+                        <field name="arch" type="xml">
+                                <form string="Agencias">
+                                        <sheet>
+                                                <group>
+                                                        <field name="name" />
+                                                        <field name="is_active" />
+                                                </group>
+                                        </sheet>
+                                </form>
+                        </field>
+                </record>
+
+		<record id="hr_agencia_tree_view" model="ir.ui.view">
+                        <field name="name">Vista de Lista de Agencias</field>
+                        <field name="model">hr.agencias</field>
+                        <field name="arch" type="xml">
+                                <tree string="Agencias">
+                                        <field name="name" />
+                                </tree>
+                        </field>
+                </record>
+
+		<record id="hr_agencia_action" model="ir.actions.act_window">
+                        <field name="name">Agencias</field>
+                        <field name="res_model">hr.agencias</field>
+                        <field name="view_mode">tree,form</field>
+                </record>
+
+		<menuitem name="Agencias" id="hr_agencias_id" sequence="10" parent="hr_payroll.payroll_configure" action="hr_agencia_action"/>
+
+		<record id="view_payslip_run_inherited" model="ir.ui.view">
+
+                        <field name="name">hr.payslip.run.form.inherited</field>
+                        <field name="model">hr.payslip.run</field>
+                        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form" />
+                        <field name="arch" type="xml">
+                                <xpath expr="//separator[@string='Payslips']" position="before">
+                                       	<group>
+						<group>
+							<field name="agencia" />
+						</group>
+					</group>
+                                </xpath>
+                        </field>
+
+                </record>
+
+
+		<record id="hr_bank_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Bancos</field>
+			<field name="model">hr.banks</field>
+			<field name="arch" type="xml">
+				<form string="Bancos">
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="input_code" />
+							<field name="phone" />
+							<field name="email" />
+							<field name="is_active" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="hr_bank_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Bancos</field>
+			<field name="model">hr.banks</field>
+			<field name="arch" type="xml">
+				<tree string="Bancos">
+					<field name="name" />
+					<field name="input_code" />
+					<field name="phone" />
+					<field name="email" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="hr_banks_action" model="ir.actions.act_window">
+			<field name="name">Bancos</field>
+			<field name="res_model">hr.banks</field>
+			<field name="view_mode">tree,form</field>	
+		</record>
+
+		<record id="bank_loan_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Prestamos Bancarios</field>
+			<field name="model">bank.loan</field>
+			<field name="arch" type="xml">
+				<form string="Prestamos Bancarios">
+					<sheet>
+						<group>
+						<group string="Información del Prestamo">
+							<field name="empleado_id" />
+							<field name="banco_id" />
+							<field name="referencia" />
+							<field name="monto_total" />
+							<field name="cuota_monto" />
+							<field name="cuota_qty" />
+							<field name="start_date" />
+						</group>
+						<group string="Saldo del Prestamo">
+							<field name="saldo" />
+							<field name="monto_cancelado" />
+						</group>
+						</group>
+						<group string="Información de Cuotas">
+							<field name="cuotas_ids" nolabel="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="bank_loan_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Prestamos Bancarios</field>
+			<field name="model">bank.loan</field>
+			<field name="arch" type="xml">
+				<tree string="Prestamos Bancarios">
+					<field name="name" />
+					<field name="cuota_qty" />
+					<field name="cuota_monto" />
+					<field name="monto_total" />
+					<field name="saldo" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="bank_loan_action" model="ir.actions.act_window">
+			<field name="name">Prestamos Bancarios</field>
+			<field name="res_model">bank.loan</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem name="Bancos" id="hr_bancos_id" sequence="10" parent="hr_payroll.payroll_configure" action="hr_banks_action"/>
+		<menuitem name="Prestamos Bancarios" id="bank_loans_id" sequence="10" parent="hr_payroll.menu_hr_root_payroll" action="bank_loan_action"/>
+
+		<record id="bank_loan_quote_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Cuotas de Prestamo Bancario</field>
+			<field name="model">bank.loan.quote</field>
+			<field name="arch" type="xml">
+				<form string="">
+					<sheet>
+						<group>
+							<field name="fecha_pago" attrs="{'readonly': [('estado','!=','pendiente')]}"/>
+							<field name="cuota_monto" attrs="{'readonly': [('estado','!=','pendiente')]}"/>
+							<field name="monto_cancelado"/>
+							<field name="estado"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="bank_loan_quote_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Cuotas de Prestamo Bancario</field>
+			<field name="model">bank.loan.quote</field>
+			<field name="arch" type="xml">
+				<tree string="Cuotas del Prestamo">
+					<field name="fecha_pago" />
+					<field name="cuota_monto" />
+					<field name="monto_cancelado" />
+					<field name="estado" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

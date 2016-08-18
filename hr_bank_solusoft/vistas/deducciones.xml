@@ -1,0 +1,254 @@
+<openerp>
+	<data>
+		<record id="hr_deduccion_partida_form_view" model="ir.ui.view">
+                        <field name="name">Vista de Formulario de Partidas Contables</field>
+                        <field name="model">deduccion.partida</field>
+                        <field name="arch" type="xml">
+                                <form string="Partidas Contables">
+                                        <sheet>
+                                                <group>
+                                                        <field name="name" />
+                                                        <field name="descripcion" />
+                                                </group>
+                                        </sheet>
+                                </form>
+                        </field>
+                </record>
+
+                <record id="hr_deduccion_partida_tree_view" model="ir.ui.view">
+                        <field name="name">Vista de Lista de Partidas Contables</field>
+                        <field name="model">deduccion.partida</field>
+                        <field name="arch" type="xml">
+                                <tree string="Agencias">
+                                        <field name="name" />
+					<field name="descripcion" />
+                                </tree>
+                        </field>
+                </record>
+
+                <record id="hr_deduccion_partida_action" model="ir.actions.act_window">
+                        <field name="name">Partidas Contables</field>
+                        <field name="res_model">deduccion.partida</field>
+                        <field name="view_mode">tree,form</field>
+                </record>
+
+                <menuitem name="Partidas Contables" id="hr_partidas_contables_id" sequence="10" parent="hr_payroll.payroll_configure" action="hr_deduccion_partida_action"/>
+
+
+		<record id="deduccion_tipo_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Tipos de Deducciones</field>
+			<field name="model">deduccion.tipo</field>
+			<field name="arch" type="xml">
+				<form string="Tipo de Deducción">
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="input_code" />
+							<field name="partida_contable" />
+							<field name="is_active" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="deduccion_tipo_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Tipos de Deducciones</field>
+			<field name="model">deduccion.tipo</field>
+			<field name="arch" type="xml">
+				<tree string="Tipo de Deduccion">
+					<field name="name" />
+					<field name="input_code" />
+					<field name="is_active" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="deduccion_tipo_action" model="ir.actions.act_window">
+			<field name="name">Tipos de Deducción</field>
+			<field name="res_model">deduccion.tipo</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem name="Deducciones" id="deduccion_tipo_id" sequence="10" parent="hr_payroll.payroll_configure" action="deduccion_tipo_action"/>
+
+
+
+		<record id="empleado_deduccion_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Deducciones de Empleado</field>
+			<field name="model">empleado.deduccion</field>
+			<field name="arch" type="xml">
+				<form string="Deducciones de Empleado">
+					<sheet>
+						<group>
+							<group string="Configuración General">
+								<field name="referencia" />
+								<field name="empleado_id" />
+								<field name="deduccion_id" string="Deduccion/Bonificacion" />
+								<field name="control_saldo" />
+								<field name="cuota_auto" />
+							</group>
+						
+							<group string="Saldos">
+								<field name="monto_inicial" attrs="{'invisible':[('control_saldo','==',False)]}" />
+								<field name="saldo" attrs="{'invisible':[('control_saldo','==',False)]}"/>
+								<field name="monto_cancelado" />
+							</group>
+						</group>
+
+						<group string="Configuración de Cuotas" attrs="{'invisible':[('cuota_auto','==',False)]}">
+                                                         <field name="cuota_qty" />
+                                                         <field name="cuota_monto" />
+                                                         <field name="fecha_inicio" />
+                                                </group>
+
+
+						<group string="Información de Cuotas">
+							<field name="deduccion_cuotas_ids" nolabel="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="empleado_deduccion_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Deducciones de Empleado</field>
+			<field name="model">empleado.deduccion</field>
+			<field name="arch" type="xml">
+				<tree string="Deducciones de Empleado">
+					<field name="empleado_id" />
+					<field name="deduccion_id" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="empleado_deduccion_view_search" model="ir.ui.view">
+			<field name="name">empleado.deduccion.view.search</field>
+			<field name="model">empleado.deduccion</field>
+			<field name="arch" type="xml">
+				<search string="Buscar Deduccion">
+					<field name="empleado_id" string="Empleado"/>
+					<field name="deduccion_id" string="Deduccion"/>
+				</search>
+			</field>
+		</record>
+
+		<record id="empleado_deduccion_action" model="ir.actions.act_window">
+			<field name="name">Deducciones de Empleado</field>
+			<field name="res_model">empleado.deduccion</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem name="Deducciones" id="empleado_deduccion_id" sequence="10" parent="hr_payroll.menu_hr_root_payroll" action="empleado_deduccion_action"/>
+
+		<record id="empleado_deduccion_cuota_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Cuotas de Deducciones de Empleado</field>
+			<field name="model">empleado.deduccion.cuota</field>
+			<field name="arch" type="xml">
+				<form string="">
+					<sheet>
+						<group>
+							<field name="fecha_pago" attrs="{'readonly':[('estado','!=','pendiente')]}"/>
+							<field name="cuota_monto" attrs="{'readonly':[('estado','!=','pendiente')]}"/>
+							<field name="monto_cancelado" />
+							<field name="estado" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="empleado_deduccion_cuota_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Cuotas de Deducciones de Empleado</field>
+			<field name="model">empleado.deduccion.cuota</field>
+			<field name="arch" type="xml">
+				<tree string="Cuotas de Deducciones de Empleado">
+					<field name="fecha_pago" />
+					<field name="cuota_monto" />
+					<field name="monto_cancelado"/>
+					<field name="estado" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="impuesto_sobre_renta_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario del Impuesto Sobre la Renta</field>
+			<field name="model">impuesto.sobre.renta</field>
+			<field name="arch" type="xml">
+				<form string="Impuesto sobre la Renta">
+					<sheet>
+						<group>
+							<group string="Resumen General">
+								<field name="empleado_id" />
+								<field name="periodo" />
+								<field name="total_isr" />
+								<field name="total_deducido" />
+								<field name="saldo_pendiente" />
+							</group>
+						
+							<group string="Totales">
+								<field name="total_salarios" />
+								<field name="total_incentivos" />
+								<field name="total_ingresos" />
+								<field name="total_deducibles" />
+								<field name="ingresos_gravables" />
+							</group>
+						</group>
+						<group string="Ingresos por Salario">
+							<field name="salarios_mensuales_ids" nolabel="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="impuesto_sobre_renta_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Impuesto Sobre la Renta</field>
+			<field name="model">impuesto.sobre.renta</field>
+			<field name="arch" type="xml">
+				<tree string="Salarios Mensuales">
+					<field name="empleado_id" />
+					<field name="periodo" />
+					<field name="total_isr" />
+					<field name="total_deducido" />
+					<field name="saldo_pendiente" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="impuesto_sobre_action" model="ir.actions.act_window">
+			<field name="name">Impuesto Sobre la Renta</field>
+			<field name="res_model">impuesto.sobre.renta</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<menuitem name="Impuesto Sobre la Renta" id="impuesto_sobre_renta_id" sequence="10" parent="hr_payroll.menu_hr_root_payroll" action="impuesto_sobre_action"/>
+		<record id="isr_salarios_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Salarios</field>
+			<field name="model">isr.salarios</field>
+			<field name="arch" type="xml">
+				<form string="">
+					<sheet>
+						<group>
+							<field name="contrato_id" />
+							<field name="mes" />
+							<field name="salario" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="isr_salarios_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Salarios</field>
+			<field name="model">isr.salarios</field>
+			<field name="arch" type="xml">
+				<tree string="Ingresos Mensuales">
+					<field name="contrato_id" />
+					<field name="mes" />
+					<field name="salario" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

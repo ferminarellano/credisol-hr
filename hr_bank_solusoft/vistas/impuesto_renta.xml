@@ -1,0 +1,78 @@
+<openerp>
+	<data>
+		<record id="isr_deducible_action" model="ir.actions.act_window">
+                        <field name="name">Deducibles del Impuesto Sobre la Renta</field>
+                        <field name="res_model">isr.deduccion</field>
+                        <field name="view_mode">tree,form</field>
+                </record>
+
+                <menuitem name="Deducibles ISR" id="isr_deducible_menu" sequence="10" parent="hr_payroll.payroll_configure" action="isr_deducible_action"/>
+
+                <record id="isr_deducibles_form_view" model="ir.ui.view">
+                        <field name="name">Vista de Formulario de Deducibles del Impuesto Sobre la Renta</field>
+                        <field name="model">isr.deduccion</field>
+                        <field name="arch" type="xml">
+                                <form string="">
+                                        <sheet>
+                                                <group>
+                                                        <field name="name"/>
+                                                        <field name="is_active"/>
+                                                </group>
+                                        </sheet>
+                                </form>
+                        </field>
+                </record>
+
+                <record id="isr_deducibles_tree_view" model="ir.ui.view">
+                        <field name="name">Vista de Lista de Deducibles del Impuesto Sobre la Renta</field>
+                        <field name="model">isr.deduccion</field>
+                        <field name="arch" type="xml">
+                                <tree string="Deducibles del Impuesto Sobre la Renta">
+                                        <field name="name" />
+                                        <field name="is_active" />
+                                </tree>
+                        </field>
+                </record>
+
+		<record id="isr_deducible_empleado_action" model="ir.actions.act_window">
+			<field name="name">Deducibles de ISR empleado</field>
+			<field name="res_model">isr.deduccion.empleado</field>
+			<field name="view_mode">tree,form</field> 
+                </record>
+		
+		<menuitem name="Deducibles ISR Empleado" id="isr_deducible_empleado_menu" sequence="10" parent="hr_payroll.menu_hr_root_payroll" action="isr_deducible_empleado_action" />
+
+
+		<record id="isr_deducibles_empleado_tree_view" model="ir.ui.view">
+			<field name="name">Vista de Lista de Deducible de ISR por empleado</field>
+			<field name="model">isr.deduccion.empleado</field>
+			<field name="arch" type="xml">
+				<tree string="Deducibles del ISR de Empleado">
+					<field name="empleado_id" />
+					<field name="isr_deduccion_id" />
+					<field name="monto" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="isr_deducibles_empleado_form_view" model="ir.ui.view">
+			<field name="name">Vista de Formulario de Deducibles del ISR por empleado</field>
+			<field name="model">isr.deduccion.empleado</field>
+			<field name="arch" type="xml">
+				<form string="">
+					<sheet>
+						<group string="Configuracion">
+							<field name="tipo" />
+						</group>
+						<group>
+							<field name="empleado_id" attrs="{'invisible':[('tipo','==','general')]}"/>
+							<field name="isr_deduccion_id" />
+							<field name="monto" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+        </data>
+</openerp>
+

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<openerp>
+	<data>
+	
+		<report
+			id="report_reporte_partida_resumida"
+			string="Partida Resumida"
+			model="hr.payslip.run"
+			report_type="qweb-pdf"
+			name="hr_bank_solusoft.report_reporte_partida_resumida_template"
+		/>
+
+		<report
+			id="report_reporte_partida_resumida_html"
+			string="Partida Resumida (HTML)"
+			model="hr.payslip.run"
+			report_type="qweb-html"
+			name="hr_bank_solusoft.report_reporte_partida_resumida_template"
+		/>
+		
+		<template id="report_reporte_partida_resumida_template">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<div style="text-align:center; margin-bottom:20px;"> <strong> <span style="text-transform:uppercase;"><span t-field="o.slip_ids[0].company_id.name" /> - Partida Resumida </span> </strong> </div>
+						
+						<div style="font-size:14px;"> 
+							<div class="pull-left" style="width:48%;">
+								<strong>Agencia:</strong> <span t-field="o.agencia" />
+							</div>
+							
+							<div class="pull-left" style="width:48%;">
+								<strong>Fecha desde:</strong> <span t-field="o.date_start" /> <br/>
+								<strong>Fecha hasta:</strong> <span t-field="o.date_end" />
+							</div>
+							<div class="clearfix" style="margin-bottom:20px"></div>
+						</div>
+						
+						<table class="table-condensed table-bordered" style="font-size:12px;">
+							<thead>
+								<tr style="border-bottom: 1px solid black;">
+									<th> <strong>DESCRIPCION CUENTA CONTABLE</strong> </th>
+									<th> <strong>CUENTA CONTABLE</strong> </th>
+									<th> <strong>DEBE</strong></th>
+									<th> <strong>HABER</strong></th>
+								</tr>
+							</thead>
+
+							<tbody>
+							
+								<tr t-foreach="get_available_accounts_ids(o.slip_ids)" t-as="account_id">
+									<td> <span t-esc="get_account_description(account_id)" /> </td>
+									<td> <span t-esc="get_account_number(account_id)" /> </td>
+									<td style="text-align:right;"> <span t-esc="get_account_total(o.slip_ids, account_id, 'debe')" /> </td>
+									<td style="text-align:right;"> <span t-esc="get_account_total(o.slip_ids, account_id, 'haber')" /> </td>
+								</tr>
+									
+								<tr>
+									<td colspan="2"> <strong>TOTAL</strong> </td>
+									<td style="text-align:right;"> <strong> <span t-esc="formatLang(get_totales(o.slip_ids,'debe'), currency_obj=o.slip_ids[0].company_id.currency_id)" style="white-space:nowrap;" /></strong> </td>
+									<td style="text-align:right;"> <strong> <span t-esc="formatLang(get_totales(o.slip_ids,'haber'), currency_obj=o.slip_ids[0].company_id.currency_id)" style="white-space:nowrap;" />  </strong> </td>
+								</tr>
+							</tbody>
+							
+						</table>				
+						
+					</div>
+				</t>
+			</t>
+		</template>
+		
+	</data>
+</openerp>
